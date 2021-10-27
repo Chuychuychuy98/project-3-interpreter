@@ -8,7 +8,7 @@ void RunLexer(Lexer* lexer, const std::string &fileName);
 
 int main(int argc, char** argv) {
     if (argc != 2) {
-        std::cout << "Usage: parser <inputFile>" << std::endl;
+        std::cout << "Usage: interpreter <inputFile>" << std::endl;
         return 0;
     }
 
@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     parser->Parse();
 
     delete lexer;
-
+    delete parser;
     return 0;
 }
 

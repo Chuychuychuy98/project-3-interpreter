@@ -20,7 +20,6 @@ public:
     DatalogProgram* Parse();
 
 private:
-    std::vector<Predicate*> predicates;
     static std::set<TokenType> FIRST(const std::string &toCheck);
     static std::set<TokenType> FOLLOW(const std::string &toCheck);
     Predicate* ParseScheme();
