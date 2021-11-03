@@ -9,10 +9,12 @@
 class Parameter {
 public:
     Parameter() = default;
-    Parameter(std::string id) : id(move(id)) {}
-    std::string GetId() {return id;}
+    Parameter(std::string id, bool isConst) : id(move(id)), isConst(isConst) {}
+    std::string GetId() const {return id;}
+    bool IsConst() const {return isConst;}
 private:
     std::string id;
+    bool isConst;
 };
 
 
