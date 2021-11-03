@@ -15,8 +15,8 @@ public:
     Predicate(std::string id) : id(move(id)) {}
     std::string ToString();
     void AddParameter(Parameter* parameter) {parameters.push_back(parameter);}
-    const std::vector<Parameter*> &GetParameters() {return parameters;}
-    const std::string &GetId() {return id;}
+    const std::vector<Parameter*> &GetParameters() const {return parameters;}
+    const std::string &GetId() const {return id;}
 
 private:
     std::string id;
