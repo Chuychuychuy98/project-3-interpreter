@@ -7,9 +7,9 @@
 std::string Relation::ToString() {
     std::string toReturn;
     for (Tuple tup : tuples) {
-        for (int i = 0; i < header.Size(); ++i) {
-            toReturn += header.GetVal(i) + "='" + tup.GetVal(i);
-            if (i < header.Size() - 1) {
+        for (int i = 0; i < header->Size(); ++i) {
+            toReturn += header->GetVal(i) + "=" + tup.GetVal(i);
+            if (i < header->Size() - 1) {
                 toReturn += ", ";
             }
         }
@@ -18,17 +18,17 @@ std::string Relation::ToString() {
     return toReturn;
 }
 
-Relation Relation::Select(int i, std::string val) {
-    Relation newRel(name, header);
+Relation* Relation::Select(int i, std::string val) {
+    Relation* newRel= new Relation(name, header);
     for (Tuple tup : tuples) {
         if (tup.GetVal(i) == val) {
-            newRel.AddTuple(tup);
+            newRel->AddTuple(tup);
         }
     }
     return newRel;
 }
-Relation Relation::Select(int i, int j) {
-    Relation newRel(name, header);
+Relation* Relation::Select(int i, int j) {
+    Relation* newRel = new Relation(name, header);
     for (Tuple tup : tuples) {
         if (tup.GetVal(i) == tup.GetVal(j)) {
             newRel.AddTuple(tup);
@@ -37,24 +37,23 @@ Relation Relation::Select(int i, int j) {
     return newRel;
 }
 
-Relation Relation::Project(std::initializer_list<int> indices) {
+Relation* Relation::Project(std::initializer_list<int> indices) {
     for (Tuple tup : tuples) {
         Tuple newTup;
         for (int i : indices) {
             newTup.AddVal(tup.GetVal(i));
         }
     }
-    Header newHead;
+    std::vector<std::string> vals;
     for (int i : indices) {
-        newHead.AddVal(header.GetVal(i));
+        vals.push_back(header->GetVal(i));
     }
-    return Relation(name, newHead);
+    Header* newHead = new Header(vals);
+    return new Relation(name, newHead);
 }
 
-Relation Relation::Rename(std::initializer_list<std::string> newAttr) {
-    Header newHeader;
-    for (std::string s : newAttr) {
-        newHeader.AddVal(s);
-    }
-    return Relation(name, newHeader);
+Relation* Relation::Rename(std::initializer_list<std::string> newAttr) {
+
+    Header *newHeader = new Header(newAttr);
+    return new Relation(name, newHeader);
 }
