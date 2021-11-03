@@ -434,10 +434,16 @@ void Parser::ParsePredicateList(Rule* rule) {
 }
 
 Parameter* Parser::ParseParameter() {
+    Parameter* param;
     if (tokens.at(index)->GetType() != TokenType::STRING && tokens.at(index)->GetType() != TokenType::ID) {
         throw tokens.at(index)->ToString();
     }
-    auto param = new Parameter(tokens.at(index)->GetDescription());
+    if (tokens.at(index)->GetType() == TokenType::STRING) {
+        param = new Parameter(tokens.at(index)->GetDescription(), true);
+    }
+    else {
+        param = new Parameter(tokens.at(index)->GetDescription(), false);
+    }
     index++;
     return param;
 }
