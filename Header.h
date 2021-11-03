@@ -9,7 +9,7 @@
 
 class Header {
 public:
-    Header() = default;
+    Header(std::vector<std::string> attr) : attr(std::move(attr)) {};
     void AddVal(const std::string &toAdd);
     bool RemVal(int index);
     bool operator< (const Header &rhs) const {
