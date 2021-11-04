@@ -3,6 +3,7 @@
 //
 
 #include "Header.h"
+#include <stdexcept>
 
 void Header::AddVal(const std::string &toAdd) {
     attr.push_back(toAdd);

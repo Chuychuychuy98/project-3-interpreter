@@ -26,7 +26,7 @@ Relation Interpreter::EvaluatePredicate(Predicate* p) {
     Relation r(*(database->GetRelation(p->GetId())));
     //std::cout << "Evaluating Query:\n\tCurrent state of table:\n" << r->ToString();
     //Step 2: For each parameter...
-    for (int i = 0; i < p->GetParameters().size(); ++i) {
+    for (unsigned int i = 0; i < p->GetParameters().size(); ++i) {
         Parameter* para = p->GetParameters().at(i);
         // Step 3: Select for each constant
         if (para->IsConst()) {
