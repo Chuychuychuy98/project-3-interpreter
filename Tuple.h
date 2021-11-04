@@ -18,6 +18,7 @@ public:
     }
     std::string GetVal(int i) {return vals.at(i);}
     int Size() {return vals.size();}
+    std::string ToString();
 
 private:
     std::vector<std::string> vals;

@@ -18,3 +18,14 @@ bool Tuple::RemVal(int index) {
     }
 }
 
+std::string Tuple::ToString() {
+    std::string toReturn;
+    for (int i = 0; i < vals.size(); ++i) {
+        toReturn += vals.at(i);
+        if (i < vals.size() - 1) {
+            toReturn += ",";
+        }
+    }
+    return toReturn;
+}
+
