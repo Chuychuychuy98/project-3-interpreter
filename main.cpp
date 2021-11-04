@@ -1,5 +1,6 @@
 #include "Lexer.h"
 #include "Parser.h"
+#include "Interpreter.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,7 +16,9 @@ int main(int argc, char** argv) {
     auto lexer = new Lexer();
     RunLexer(lexer, argv[1]);
     auto parser = new Parser(lexer->GetTokens());
-    parser->Parse();
+    auto interpreter = new Interpreter(parser->Parse());
+    //std::cout << interpreter->ToString();
+    interpreter->Interpret();
 
     delete lexer;
     delete parser;
