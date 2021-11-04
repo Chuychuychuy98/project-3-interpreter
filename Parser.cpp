@@ -95,8 +95,8 @@ DatalogProgram *Parser::Parse() {
         if (tokens.at(index)->GetType() != TokenType::END_OF_FILE) {
             throw tokens.at(index)->ToString();
         }
-        std::cout << "Success!" << std::endl;
-        std::cout << prog->ToString();
+        //std::cout << "Success!" << std::endl;
+        //std::cout << prog->ToString();
         return prog;
     }
     catch(std::string &message) {
@@ -160,7 +160,7 @@ Predicate* Parser::ParseScheme() {
     if (tokens.at(index)->GetType() != TokenType::ID) {
         throw tokens.at(index)->ToString();
     }
-    pred->AddParameter(new Parameter(tokens.at(index)->GetDescription()));
+    pred->AddParameter(new Parameter(tokens.at(index)->GetDescription(), false));
     index++;
 
     if (FIRST("idList").count(tokens.at(index)->GetType())) {
@@ -280,7 +280,7 @@ Predicate* Parser::ParseFact() {
     if (tokens.at(index)->GetType() != TokenType::STRING) {
         throw tokens.at(index)->ToString();
     }
-    pred->AddParameter(new Parameter(tokens.at(index)->GetDescription()));
+    pred->AddParameter(new Parameter(tokens.at(index)->GetDescription(), true));
     index++;
 
     if (FIRST("stringList").count(tokens.at(index)->GetType())) {
@@ -311,7 +311,7 @@ void Parser::ParseStringList(Predicate* pred) {
     if (tokens.at(index)->GetType() != TokenType::STRING) {
         throw tokens.at(index)->ToString();
     }
-    pred->AddParameter(new Parameter(tokens.at(index)->GetDescription()));
+    pred->AddParameter(new Parameter(tokens.at(index)->GetDescription(), true));
     index++;
 
     if (FIRST("stringList").count(tokens.at(index)->GetType())) {
