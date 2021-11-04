@@ -11,7 +11,8 @@
 
 class Relation {
 public:
-    Relation(std::string name, Header* header) : name(std::move(name)), header(header) {}
+    Relation(std::string name, Header header) : name(std::move(name)), header(header) {}
+    Relation(const Relation& r) : tuples(r.tuples), header(r.header), name(r.name) {}
     void AddTuple(Tuple tup) {if (tup.Size() == header.Size()) tuples.insert(tup);}
     Relation Select(int i, std::string val);
     Relation Select(int i, int j);
@@ -24,7 +25,7 @@ public:
 
 private:
     std::set<Tuple> tuples;
-    Header *header;
+    Header header;
     std::string name;
 };
 
